@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brello - Email Verification</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: white;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .button {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-btn {
+            color: #4185F4;
+            border: 1px solid #4185F4;
+        }
+
+        .start-btn {
+            background-color: #4185F4;
+            color: white;
+        }
+
+        .content {
+            max-width: 600px;
+            margin: 4rem auto;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #172B4D;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: #172B4D;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo">
+            <img src="/images/brello-logo.png" alt="Brello Logo">
+        </a>
+        <div class="nav-buttons">
+            <a href="/login.html" class="button login-btn">Login</a>
+            <a href="/signup.html" class="button start-btn">Start Now</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <h1>Successfully signed up!</h1>
+        <p>Check your inbox for a confirmation email. If this email is not already in use you will have received a confirmation email.</p>
+    </div>
+</body>
+</html>

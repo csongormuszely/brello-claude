@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brello - Get Organized</title>
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: white;
+        }
+
+        /* Navigation bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 4rem;
+            background-color: #eef2f6;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;         
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            display: block;  
+            margin: auto 0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .button {
+            padding: 0.7rem 1rem;  /* Made padding larger */
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;  /* Made font size larger */
+            display: inline-flex;    
+            align-items: center;     
+            justify-content: center;
+        }
+
+        .login-btn {
+            color: #4185F4;
+            border: 3px solid #4185F4;
+        }
+
+        .start-btn {
+            background-color: #4185F4;
+            color: white;
+        }
+
+        /* Sign Up Form */
+        .signup-container {
+            max-width: 700px;
+            margin: 8rem auto;
+            padding: 2rem;
+            background-color: #eef2f6;
+            border-radius: 12px;
+        }
+
+        .signup-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #172B4D;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #172B4D;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #4185F4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .login-link {
+            text-align: left;
+            color: #172B4D;
+        }
+
+        .login-link a {
+            color: #4185F4;
+            text-decoration: none;
+        }
+        .verification-container {
+            max-width: 600px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .verification-message {
+            margin: 2rem 0;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="./images/brello-logo.png" alt="Brello Logo">
+        </a>
+        <div class="nav-buttons">
+            <a href="login.html" class="button login-btn">Login</a>
+            <a href="signup.html" class="button start-btn">Start Now</a>
+        </div>
+    </nav>
+
+    <div class="verification-container">
+        <h2>Email Verification</h2>
+        <div id="message" class="verification-message">
+            Verifying your email...
+        </div>
+    </div>
+
+    <script>
+        // Get token from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        if (token) {
+            verifyEmail(token);
+        } else {
+            document.getElementById('message').textContent = 'Invalid verification link';
+        }
+
+        async function verifyEmail(token) {
+            try {
+                const response = await fetch('http://localhost:3000/api/verify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ token })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('message').textContent = 
+                        'Email verified successfully! You can now log in to your account.';
+                    // Redirect to login page after 3 seconds
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 3000);
+                } else {
+                    document.getElementById('message').textContent = data.message;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('message').textContent = 
+                    'An error occurred during verification. Please try again.';
+            }
+        }
+    </script>
+</body>
+</html>

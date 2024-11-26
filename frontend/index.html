@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brello - Get Organized</title>
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: white;
+        }
+
+        /* Navigation bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 4rem;
+            background-color: #eef2f6;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;         
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            display: block;  
+            margin: auto 0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .button {
+            padding: 0.7rem 1rem;  /* Made padding larger */
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;  /* Made font size larger */
+            display: inline-flex;    
+            align-items: center;     
+            justify-content: center;
+        }
+
+        .login-btn {
+            color: #4185F4;
+            border: 3px solid #4185F4;
+        }
+
+        .start-btn {
+            background-color: #4185F4;
+            color: white;
+        }
+
+        /* Main content */
+        .main-content {
+            max-width: 1200px;
+            margin: 6rem auto;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 3rem;
+        }
+
+        .hero-button {
+            background-color: #4185F4;
+            color: white;
+            padding: 0.75rem 1.0rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+
+        /* Demo image */
+        .demo-image {
+            max-width: 800px;
+            width: 100%;
+            margin-top: 4rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .demo-image-container {
+            padding: 0 20px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo">
+            <img src="./images/brello-logo.png" alt="Brello Logo">
+        </a>
+        <div class="nav-buttons">
+            <a href="login.html" class="button login-btn">Login</a>
+            <a href="signup.html" class="button start-btn">Start Now</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <h1 class="hero-title">Get Organized</h1>
+        <p class="hero-subtitle">...with Brello</p>
+        <a href="signup.html" class="hero-button">Start Now</a>
+        
+        <div class="demo-image-container">
+            <img src="./images/board-demo.png" alt="Brello Board Demo" class="demo-image">
+        </div>
+    </div>
+</body>
+</html>
