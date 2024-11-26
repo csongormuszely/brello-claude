@@ -1,659 +1,375 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Brello - Get Organized</title>
-    <link rel="icon" type="image/png" href="/images/favicon.ico">
+    <link rel="icon" type="image/png" href="/images/favicon.ico" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
 
-        body {
-            background-color: white;
-        }
+      body {
+        background-color: white;
+      }
 
-        /* Navigation bar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 4rem;
-            background-color: #eef2f6;
-        }
+      /* Navigation bar */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 4rem;
+        background-color: #eef2f6;
+      }
 
-        .logo {
-            text-decoration: none;
-            display: flex;         
-            align-items: center;
-        }
+      .logo {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+      }
 
-        .logo img {
-            height: 50px;
-            width: auto;
-            display: block;  
-            margin: auto 0;
-        }
+      .logo img {
+        height: 50px;
+        width: auto;
+        display: block;
+        margin: auto 0;
+      }
 
-        .profile-icon {
-            width: 50px;
-            height: 50px;
-            background-color: #dee2e6;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
+      .profile-icon {
+        width: 50px;
+        height: 50px;
+        background-color: #dee2e6;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
 
-        /* Main content */
-        .container {
-            padding: 2rem;
-        }
+      /* Main content */
+      .container {
+        padding: 2rem;
+      }
 
-        .section {
-            margin-bottom: 2.1rem;
-        }
+      .section {
+        margin-bottom: 2.1rem;
+      }
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            color: #212529;
-        }
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #212529;
+      }
 
-        .boards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1.2fr));
-            gap: 1rem;
-        }
+      .boards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1.2fr));
+        gap: 1rem;
+      }
 
-        .board-card {
-            height: 100px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: black;
-            font-size: 1.4rem;
-            text-decoration: none;
-            cursor: pointer;
-            transition: opacity 0.2s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow */
-        }
+      .board-card {
+        height: 100px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: black;
+        font-size: 1.4rem;
+        text-decoration: none;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow */
+      }
 
-        .board-card:hover {
-            opacity: 0.8;
-        }
+      .board-card:hover {
+        opacity: 0.8;
+      }
 
-        .board-card {
-            color: #212529;
-            font-weight: 500;
-            text-align: center;
-            padding: 1rem;
-            word-break: break-word;
-        }
+      .board-card {
+        color: #212529;
+        font-weight: 500;
+        text-align: center;
+        padding: 1rem;
+        word-break: break-word;
+      }
 
-        .create-board {
-            background-color: #dce6f1;
-            border: none;
-            font-size: 50px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow */
-        }
+      .create-board {
+        background-color: #dce6f1;
+        border: none;
+        font-size: 50px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow */
+      }
 
-        .profile-container {
-            position: relative;
-        }
+      .profile-container {
+        position: relative;
+      }
 
-        .profile-dropdown {
-            position: absolute;
-            top: calc(100% + 10px);
-            right: 0;
-            background-color: #f4f9ff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 1rem;
-            min-width: 250px;
-            display: none;
-            z-index: 1000;
-        }
+      .profile-dropdown {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        background-color: #f4f9ff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        min-width: 250px;
+        display: none;
+        z-index: 1000;
+      }
 
-        .profile-dropdown.active {
-            display: block;
-        }
+      .profile-dropdown.active {
+        display: block;
+      }
 
-        .profile-dropdown-content {
-            display: flex;
-            flex-direction: column;
-        }
+      .profile-dropdown-content {
+        display: flex;
+        flex-direction: column;
+      }
 
-        .dropdown-header {
-            padding-bottom: 0.5rem;
-            margin-bottom: 0.5rem;
-            border-bottom: 1px solid #e9ecef;
-            color: #172B4D;
-            font-size: 0.9rem;
-            word-break: break-all;
-            text-align: center;
-        }
+      .dropdown-header {
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid #e9ecef;
+        color: #172b4d;
+        font-size: 0.9rem;
+        word-break: break-all;
+        text-align: center;
+      }
 
-        .dropdown-item {
-            padding: 0.5rem;
-            color: #172B4D;
-            text-decoration: none;
-            cursor: pointer;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            flex-direction: row-reverse;
-        }
+      .dropdown-item {
+        padding: 0.5rem;
+        color: #172b4d;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex-direction: row-reverse;
+      }
 
-        .dropdown-item:hover {
-            background-color: #dbe1e6;
-        }
+      .dropdown-item:hover {
+        background-color: #dbe1e6;
+      }
 
-        .signout-icon {
-            width: 16px;
-            height: 16px;
-        }
+      .signout-icon {
+        width: 16px;
+        height: 16px;
+      }
 
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
 
-        .modal-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            width: 400px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+      .modal-content {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 12px;
+        width: 400px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
 
-        .modal-title {
-            font-size: 1.8rem;
-            color: #172B4D;
-            margin-bottom: 1.5rem;
-        }
+      .modal-title {
+        font-size: 1.8rem;
+        color: #172b4d;
+        margin-bottom: 1.5rem;
+      }
 
-        .board-title-input {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #DFE1E6;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
+      .board-title-input {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #dfe1e6;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+      }
 
-        .board-title-input::placeholder {
-            color: #A0A0A0;
-        }
+      .board-title-input::placeholder {
+        color: #a0a0a0;
+      }
 
-        .color-section {
-            margin-bottom: 2rem;
-        }
+      .color-section {
+        margin-bottom: 2rem;
+      }
 
-        .color-title {
-            font-size: 1.3rem;
-            color: #172B4D;
-            margin-bottom: 1rem;
-        }
+      .color-title {
+        font-size: 1.3rem;
+        color: #172b4d;
+        margin-bottom: 1rem;
+      }
 
-        .color-options {
-            display: flex;
-            gap: 1rem;
-        }
+      .color-options {
+        display: flex;
+        gap: 1rem;
+      }
 
-        .color-option {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
+      .color-option {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
 
-        .color-option:hover {
-            transform: scale(1.1);
-        }
+      .color-option:hover {
+        transform: scale(1.1);
+      }
 
-        .color-option.selected {
-            outline: 2px solid #dce6f1;
-            outline-offset: 2px;
-        }
+      .color-option.selected {
+        outline: 2px solid #dce6f1;
+        outline-offset: 2px;
+      }
 
-        .color-option.blue { background-color: #4185F4; }
-        .color-option.green { background-color: #51CF66; }
-        .color-option.red { background-color: #FA5252; }
-        .color-option.yellow { background-color: #FFD43B; }
-        .color-option.purple { background-color: #9775FA; }
+      .color-option.blue {
+        background-color: #4185f4;
+      }
+      .color-option.green {
+        background-color: #51cf66;
+      }
+      .color-option.red {
+        background-color: #fa5252;
+      }
+      .color-option.yellow {
+        background-color: #ffd43b;
+      }
+      .color-option.purple {
+        background-color: #9775fa;
+      }
 
-        .create-btn {
-            background-color: #6a7785;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 0.8rem 2rem;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
+      .create-btn {
+        background-color: #6a7785;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
 
-        .create-btn:hover {
-            background-color: #696969;
-        }
+      .create-btn:hover {
+        background-color: #696969;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navbar">
-        <a href="/" class="logo">
-            <img src="/images/brello-logo.png" alt="Brello Logo">
-        </a>
-        <div class="profile-container">
-            <div class="profile-icon" onclick="toggleProfileDropdown()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-            </div>
-            <div class="profile-dropdown" id="profileDropdown">
-                <div class="profile-dropdown-content">
-                    <div class="dropdown-header" id="userEmail">
-                        <!-- Email will be inserted here -->
-                    </div>
-                    <a href="#" class="dropdown-item" onclick="signOut()">
-                        <svg class="signout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                            <polyline points="16 17 21 12 16 7"></polyline>
-                            <line x1="21" y1="12" x2="9" y2="12"></line>
-                        </svg>
-                        Sign out
-                    </a>
-                </div>
-            </div>
+      <a href="/" class="logo">
+        <img src="/images/brello-logo.png" alt="Brello Logo" />
+      </a>
+      <div class="profile-container">
+        <div class="profile-icon" onclick="toggleProfileDropdown()">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
         </div>
+        <div class="profile-dropdown" id="profileDropdown">
+          <div class="profile-dropdown-content">
+            <div class="dropdown-header" id="userEmail">
+              <!-- Email will be inserted here -->
+            </div>
+            <a href="#" class="dropdown-item" onclick="signOut()">
+              <svg
+                class="signout-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              Sign out
+            </a>
+          </div>
+        </div>
+      </div>
     </nav>
 
     <div class="container">
-        <div class="section">
-            <h2 class="section-title">My Boards</h2>
-            <div class="boards-grid" id="myBoardsGrid">
-                <button class="board-card create-board" onclick="createNewBoard()">+</button>
-            </div>
+      <div class="section">
+        <h2 class="section-title">My Boards</h2>
+        <div class="boards-grid" id="myBoardsGrid">
+          <button class="board-card create-board" onclick="createNewBoard()">
+            +
+          </button>
         </div>
-    
-        <div class="section">
-            <h2 class="section-title">Shared Boards</h2>
-            <div class="boards-grid" id="sharedBoardsGrid">
-                <!-- Shared boards will be added here dynamically -->
-            </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Shared Boards</h2>
+        <div class="boards-grid" id="sharedBoardsGrid">
+          <!-- Shared boards will be added here dynamically -->
         </div>
+      </div>
     </div>
 
-    <script>
-        // Debug function to show all localStorage contents
-        function debugLocalStorage() {
-            console.log('==== DEBUG: ALL LOCALSTORAGE CONTENTS ====');
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                const value = localStorage.getItem(key);
-                console.log(`${key}:`, value);
-            }
-            console.log('=======================================');
-        }
+    <script src="scripts/boards.js"></script>
 
-        // Call this function at key points
-        document.addEventListener('DOMContentLoaded', debugLocalStorage);
-        
-        /*function createNewBoard() {
-            // To be implemented
-            alert('Create new board feature coming soon!');
-        }*/
+    <div id="createBoardModal" class="modal" style="display: none">
+      <div class="modal-content">
+        <h2 class="modal-title">New Board</h2>
+        <input
+          type="text"
+          id="boardTitle"
+          class="board-title-input"
+          placeholder="Board name"
+        />
 
-        // Check if user is logged in
-        function checkAuth() {
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
-            if (!isLoggedIn) {
-                window.location.href = '/login.html';
-            }
-        }
-
-        // Check authentication when page loads
-        checkAuth();
-
-        function toggleProfileDropdown() {
-            const dropdown = document.getElementById('profileDropdown');
-            dropdown.classList.toggle('active');
-            
-            // Display user email
-            const userEmail = localStorage.getItem('userEmail');
-            if (userEmail) {
-                document.getElementById('userEmail').textContent = userEmail;
-            }
-        }
-
-        // Make sure to store email during login
-        function checkAuth() {
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
-            const userEmail = localStorage.getItem('userEmail');
-            if (!isLoggedIn || !userEmail) {
-                window.location.href = '/login.html';
-            }
-        }
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('profileDropdown');
-            const profileIcon = document.querySelector('.profile-icon');
-            
-            if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
-                dropdown.classList.remove('active');
-            }
-        });
-
-        function signOut() {
-            console.log('Starting sign out process');
-            const userEmail = localStorage.getItem('userEmail');
-            console.log('Current user:', userEmail);
-
-            // Store boards data in sessionStorage
-            const boardsData = localStorage.getItem(userEmail);
-            if (boardsData) {
-                const backupKey = 'savedBoards_' + userEmail;
-                sessionStorage.setItem(backupKey, boardsData);  // Use sessionStorage instead
-                console.log('Saved boards in sessionStorage:', boardsData);
-            }
-
-            // Clear localStorage
-            localStorage.clear();
-            
-            window.location.href = '/login.html';
-        }
-
-        let selectedColor = '#4185F4'; // Default color
-
-        async function createNewBoard() {
-            // Display prompt for board title
-            const title = prompt('Enter board title:');
-            if (!title) return; // User cancelled or entered empty title
-            
-            try {
-                const userEmail = localStorage.getItem('userEmail');
-                const board = {
-                    title: title,
-                    color: '#4185F4', // Default color
-                    owner: userEmail,
-                    sharedWith: [],
-                    lists: []
-                };
-
-                console.log('Sending board data:', board);
-
-                const response = await fetch('/api/boards', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(board)
-                });
-
-                if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error.message || 'Failed to create board');
-                }
-
-                const newBoard = await response.json();
-                console.log('Board created:', newBoard);
-
-                // Reload boards
-                loadAllBoards();
-            } catch (error) {
-                console.error('Error creating board:', error);
-                alert('Failed to create board: ' + error.message);
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('createBoardModal').style.display = 'none';
-            document.getElementById('boardTitle').value = '';
-            // Reset color selection
-            document.querySelectorAll('.color-option').forEach(btn => btn.classList.remove('selected'));
-            document.querySelector('.color-option.blue').classList.add('selected');
-            selectedColor = '#4185F4';
-        }
-
-        function selectColor(color) {
-            selectedColor = color;
-            // Update selected state
-            document.querySelectorAll('.color-option').forEach(btn => btn.classList.remove('selected'));
-            event.target.classList.add('selected');
-        }
-
-        function loadBoards() {
-            console.log('Starting loadBoards function');
-            showLocalStorage('start of loadBoards');
-            
-            const myBoardsGrid = document.getElementById('myBoardsGrid');
-            const userEmail = localStorage.getItem('userEmail');
-            console.log('Current user email:', userEmail);
-            
-            if (!userEmail) {
-                console.log('No user email found - redirecting to login');
-                window.location.href = '/login.html';
-                return;
-            }
-
-            // Check for saved boards
-            const backupKey = 'savedBoards_' + userEmail;
-            const savedBoards = localStorage.getItem(backupKey);
-            console.log('Checking backup key:', backupKey);
-            console.log('Found saved boards:', savedBoards);
-
-            if (savedBoards) {
-                console.log('Restoring saved boards');
-                localStorage.setItem(userEmail, savedBoards);
-                localStorage.removeItem(backupKey);
-            }
-
-            // Get current boards
-            const userBoards = JSON.parse(localStorage.getItem(userEmail) || '[]');
-            console.log('Final boards data:', userBoards);
-
-            // Clear existing boards
-            while (myBoardsGrid.children.length > 1) {
-                myBoardsGrid.removeChild(myBoardsGrid.firstChild);
-            }
-
-            // Add boards
-            userBoards.forEach(board => {
-                console.log('Adding board:', board);
-                const boardCard = document.createElement('a');
-                boardCard.href = `board.html?id=${board.id}&title=${encodeURIComponent(board.title)}&color=${encodeURIComponent(board.color)}`;
-                boardCard.className = 'board-card';
-                boardCard.style.backgroundColor = board.color;
-                boardCard.textContent = board.title;
-                
-                myBoardsGrid.insertBefore(boardCard, document.querySelector('.create-board'));
-            });
-
-            showLocalStorage('end of loadBoards');
-        }
-
-        // Add this helper function
-        function showLocalStorage(message) {
-            console.log('==== LocalStorage Contents (' + message + ') ====');
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                console.log(`${key}:`, localStorage.getItem(key));
-            }
-            console.log('==========================================');
-        }
-
-        // Call loadBoards when page loads
-        document.addEventListener('DOMContentLoaded', loadBoards);
-
-        // Make sure loadBoards is called at the right times
-        document.addEventListener('DOMContentLoaded', loadBoards);
-
-        async function saveBoard(boardData) {
-            try {
-                const response = await fetch('/api/boards', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(boardData)
-                });
-                return await response.json();
-            } catch (error) {
-                console.error('Error saving board:', error);
-                throw error;
-            }
-        }
-
-        async function loadAllBoards() {
-            try {
-                const userEmail = localStorage.getItem('userEmail');
-                console.log('Loading boards for:', userEmail);
-
-                // Load personal boards
-                const response = await fetch(`/api/boards/user/${userEmail}`);
-                if (!response.ok) {
-                    throw new Error('Failed to load boards');
-                }
-
-                const boards = await response.json();
-                console.log('Loaded boards:', boards);
-
-                // Update UI
-                const myBoardsGrid = document.getElementById('myBoardsGrid');
-                myBoardsGrid.innerHTML = ''; // Clear existing boards
-
-                // Add create board button
-                const addButton = document.createElement('button');
-                addButton.className = 'board-card create-board';
-                addButton.onclick = createNewBoard;
-                addButton.textContent = '+';
-                myBoardsGrid.appendChild(addButton);
-
-                // Add existing boards
-                boards.forEach(board => {
-                    const boardCard = createBoardCard(board);
-                    myBoardsGrid.insertBefore(boardCard, addButton);
-                });
-
-            } catch (error) {
-                console.error('Error loading boards:', error);
-                alert('Failed to load boards: ' + error.message);
-            }
-        }
-
-        // Call when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('Page loaded - calling loadAllBoards');
-            loadAllBoards();
-        });
-
-        function createBoardCard(board) {
-            const boardCard = document.createElement('a');
-            boardCard.href = `board.html?id=${board.id}&title=${encodeURIComponent(board.title)}&color=${encodeURIComponent(board.color)}`;
-            boardCard.className = 'board-card';
-            boardCard.style.backgroundColor = board.color;
-            boardCard.textContent = board.title;
-            return boardCard;
-        }
-
-        // Call when page loads
-        document.addEventListener('DOMContentLoaded', loadAllBoards);
-
-        async function handleCreateBoard() {
-            const title = document.getElementById('boardTitle').value.trim();
-            
-            if (!title) {
-                alert('Please enter a board name');
-                return;
-            }
-
-            try {
-                const userEmail = localStorage.getItem('userEmail');
-                console.log('Before creating board - localStorage contents:');
-                debugLocalStorage();
-
-                // Get user's boards
-                const userBoards = JSON.parse(localStorage.getItem(userEmail) || '[]');
-                
-                // Create new board
-                const newBoard = {
-                    id: Date.now(),
-                    title: title,
-                    color: selectedColor,
-                    createdAt: new Date().toISOString()
-                };
-                
-                // Add new board
-                userBoards.push(newBoard);
-                
-                // Save boards using email as key
-                localStorage.setItem(userEmail, JSON.stringify(userBoards));
-                
-                console.log('After saving board - localStorage contents:');
-                debugLocalStorage();
-
-                closeModal();
-                window.location.href = `board.html?id=${newBoard.id}&title=${encodeURIComponent(title)}&color=${encodeURIComponent(selectedColor)}`;
-            } catch (error) {
-                console.error('Error creating board:', error);
-                alert('Error creating board. Please try again.');
-            }
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('createBoardModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
-    </script>
-
-    <div id="createBoardModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h2 class="modal-title">New Board</h2>
-            <input type="text" id="boardTitle" class="board-title-input" placeholder="Board name">
-            
-            <div class="color-section">
-                <h3 class="color-title">Color</h3>
-                <div class="color-options">
-                    <button class="color-option blue selected" onclick="selectColor('#4185F4')"></button>
-                    <button class="color-option green" onclick="selectColor('#51CF66')"></button>
-                    <button class="color-option red" onclick="selectColor('#FA5252')"></button>
-                    <button class="color-option yellow" onclick="selectColor('#FFD43B')"></button>
-                    <button class="color-option purple" onclick="selectColor('#9775FA')"></button>
-                </div>
-            </div>
-    
-            <button class="create-btn" onclick="handleCreateBoard()">Create</button>
+        <div class="color-section">
+          <h3 class="color-title">Color</h3>
+          <div class="color-options">
+            <button
+              class="color-option blue selected"
+              onclick="selectColor('#4185F4')"
+            ></button>
+            <button
+              class="color-option green"
+              onclick="selectColor('#51CF66')"
+            ></button>
+            <button
+              class="color-option red"
+              onclick="selectColor('#FA5252')"
+            ></button>
+            <button
+              class="color-option yellow"
+              onclick="selectColor('#FFD43B')"
+            ></button>
+            <button
+              class="color-option purple"
+              onclick="selectColor('#9775FA')"
+            ></button>
+          </div>
         </div>
+
+        <button class="create-btn" onclick="handleCreateBoard()">Create</button>
+      </div>
     </div>
-</body>
+  </body>
 </html>

@@ -1,265 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Brello - Get Organized</title>
-    <link rel="icon" type="image/png" href="/images/favicon.ico">
+    <link rel="icon" type="image/png" href="/images/favicon.ico" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
 
-        body {
-            background-color: white;
-        }
+      body {
+        background-color: white;
+      }
 
-        /* Navigation bar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 4rem;
-            background-color: #eef2f6;
-        }
+      /* Navigation bar */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 4rem;
+        background-color: #eef2f6;
+      }
 
-        .logo {
-            text-decoration: none;
-            display: flex;         
-            align-items: center;
-        }
+      .logo {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+      }
 
-        .logo img {
-            height: 50px;
-            width: auto;
-            display: block;  
-            margin: auto 0;
-        }
+      .logo img {
+        height: 50px;
+        width: auto;
+        display: block;
+        margin: auto 0;
+      }
 
-        .nav-buttons {
-            display: flex;
-            gap: 1rem;
-        }
+      .nav-buttons {
+        display: flex;
+        gap: 1rem;
+      }
 
-        .button {
-            padding: 0.7rem 1rem;  /* Made padding larger */
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.2rem;  /* Made font size larger */
-            display: inline-flex;    
-            align-items: center;     
-            justify-content: center;
-        }
+      .button {
+        padding: 0.7rem 1rem; /* Made padding larger */
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.2rem; /* Made font size larger */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        .login-btn {
-            color: #4185F4;
-            border: 3px solid #4185F4;
-        }
+      .login-btn {
+        color: #4185f4;
+        border: 3px solid #4185f4;
+      }
 
-        .start-btn {
-            background-color: #4185F4;
-            color: white;
-        }
+      .start-btn {
+        background-color: #4185f4;
+        color: white;
+      }
 
-        /* Sign Up Form */
-        .signup-container {
-            max-width: 700px;
-            margin: 8rem auto;
-            padding: 2rem;
-            background-color: #eef2f6;
-            border-radius: 12px;
-        }
+      /* Sign Up Form */
+      .signup-container {
+        max-width: 700px;
+        margin: 8rem auto;
+        padding: 2rem;
+        background-color: #eef2f6;
+        border-radius: 12px;
+      }
 
-        .signup-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-            color: #172B4D;
-        }
+      .signup-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        color: #172b4d;
+      }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #172B4D;
-        }
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #172b4d;
+      }
 
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
+      .form-group input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+      }
 
-        .signup-btn {
-            width: 100%;
-            padding: 0.8rem;
-            background-color: #4185F4;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
+      .signup-btn {
+        width: 100%;
+        padding: 0.8rem;
+        background-color: #4185f4;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        margin-bottom: 1rem;
+        font-weight: bold;
+      }
 
-        .login-link {
-            text-align: left;
-            color: #172B4D;
-        }
+      .login-link {
+        text-align: left;
+        color: #172b4d;
+      }
 
-        .login-link a {
-            color: #4185F4;
-            text-decoration: none;
-        }
+      .login-link a {
+        color: #4185f4;
+        text-decoration: none;
+      }
 
-        .login-link a {
-            color: #172B4D;
-            text-decoration: none;
-            cursor: pointer;
-        }
+      .login-link a {
+        color: #172b4d;
+        text-decoration: none;
+        cursor: pointer;
+      }
 
-        .login-link a:hover {
-            text-decoration: underline;
-        }
+      .login-link a:hover {
+        text-decoration: underline;
+      }
 
-        .error-message {
-            color: #f44336;  /* Red color for error */
-            margin-top: 8px;
-            margin-bottom: 16px;
-            font-size: 0.9rem;
-            display: none;  /* Hidden by default */
-        }
+      .error-message {
+        color: #f44336; /* Red color for error */
+        margin-top: 8px;
+        margin-bottom: 16px;
+        font-size: 0.9rem;
+        display: none; /* Hidden by default */
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navbar">
-        <a href="index.html" class="logo">
-            <img src="./images/brello-logo.png" alt="Brello Logo">
-        </a>
-        <div class="nav-buttons">
-            <a href="login.html" class="button login-btn">Login</a>
-            <a href="signup.html" class="button start-btn">Start Now</a>
-        </div>
+      <a href="index.html" class="logo">
+        <img src="./images/brello-logo.png" alt="Brello Logo" />
+      </a>
+      <div class="nav-buttons">
+        <a href="login.html" class="button login-btn">Login</a>
+        <a href="signup.html" class="button start-btn">Start Now</a>
+      </div>
     </nav>
 
     <div class="signup-container">
-        <h2 class="signup-title">Login</h2>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="error-message" id="errorMessage"></div>
-            <button type="submit" class="signup-btn">Login</button>
-            <p class="login-link">
-                <a href="signup.html">Sign up instead?</a>
-            </p>
-        </form>
+      <h2 class="signup-title">Login</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div class="error-message" id="errorMessage"></div>
+        <button type="submit" class="signup-btn">Login</button>
+        <p class="login-link">
+          <a href="signup.html">Sign up instead?</a>
+        </p>
+      </form>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const verified = urlParams.get('verified');
-            
-            if (verified === 'true') {
-                alert('Email verified successfully! You can now log in.');
-            } else if (verified === 'false') {
-                alert('Email verification failed. Please try signing up again.');
-            }
-        });
-        
-        // Debug helper
-        function showLocalStorage(message) {
-            console.log('==== LocalStorage Contents (' + message + ') ====');
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                console.log(`${key}:`, localStorage.getItem(key));
-            }
-            console.log('==========================================');
-        }
-
-        // Show localStorage contents when page loads
-        showLocalStorage('login page load');
-        
-        // First, clear any existing login state when the page loads
-        console.log('Login page loaded');
-        localStorage.clear();
-        
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('errorMessage');
-
-            console.log('1. Login attempt for:', email);
-
-            try {
-                const response = await fetch('http://localhost:3000/api/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-
-                const data = await response.json();
-                console.log('2. Server response:', data);
-
-                if (response.ok) {
-                    console.log('3. Login successful');
-                    
-                    // Store login state
-                    localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('userEmail', email);
-                    
-                    // Check sessionStorage for saved boards
-                    const backupKey = 'savedBoards_' + email;
-                    const savedBoards = sessionStorage.getItem(backupKey);
-                    console.log('Found saved boards in sessionStorage:', savedBoards);
-                    
-                    if (savedBoards) {
-                        console.log('Restoring boards for:', email);
-                        localStorage.setItem(email, savedBoards);
-                        sessionStorage.removeItem(backupKey);
-                    }
-                    
-                    window.location.href = 'boards.html';
-                } else {
-                    errorMessage.textContent = data.message || 'Invalid login credentials';
-                    errorMessage.style.display = 'block';
-                }
-
-            } catch (error) {
-                console.error('Login error:', error);
-                errorMessage.textContent = 'An error occurred during login';
-                errorMessage.style.display = 'block';
-            }
-        });
-    
-        // Test localStorage immediately when page loads
-        try {
-            localStorage.setItem('testKey', 'testValue');
-            console.log('localStorage test:', localStorage.getItem('testKey'));
-            localStorage.removeItem('testKey');
-            console.log('localStorage is working');
-        } catch (e) {
-            console.error('localStorage test failed:', e);
-        }
-    </script>
-</body>
+    <script src="scripts/login.js"></script>
+  </body>
 </html>

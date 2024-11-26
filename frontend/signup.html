@@ -1,241 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Brello - Get Organized</title>
-    <link rel="icon" type="image/png" href="/images/favicon.ico">
+    <link rel="icon" type="image/png" href="/images/favicon.ico" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
 
-        body {
-            background-color: white;
-        }
+      body {
+        background-color: white;
+      }
 
-        /* Navigation bar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 4rem;
-            background-color: #eef2f6;
-        }
+      /* Navigation bar */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 4rem;
+        background-color: #eef2f6;
+      }
 
-        .logo {
-            text-decoration: none;
-            display: flex;         
-            align-items: center;
-        }
+      .logo {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+      }
 
-        .logo img {
-            height: 50px;
-            width: auto;
-            display: block;  
-            margin: auto 0;
-        }
+      .logo img {
+        height: 50px;
+        width: auto;
+        display: block;
+        margin: auto 0;
+      }
 
-        .nav-buttons {
-            display: flex;
-            gap: 1rem;
-        }
+      .nav-buttons {
+        display: flex;
+        gap: 1rem;
+      }
 
-        .button {
-            padding: 0.7rem 1rem;  /* Made padding larger */
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.2rem;  /* Made font size larger */
-            display: inline-flex;    
-            align-items: center;     
-            justify-content: center;
-        }
+      .button {
+        padding: 0.7rem 1rem; /* Made padding larger */
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.2rem; /* Made font size larger */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        .login-btn {
-            color: #4185F4;
-            border: 3px solid #4185F4;
-        }
+      .login-btn {
+        color: #4185f4;
+        border: 3px solid #4185f4;
+      }
 
-        .start-btn {
-            background-color: #4185F4;
-            color: white;
-        }
+      .start-btn {
+        background-color: #4185f4;
+        color: white;
+      }
 
-        /* Sign Up Form */
-        .signup-container {
-            max-width: 700px;
-            margin: 8rem auto;
-            padding: 2rem;
-            background-color: #eef2f6;
-            border-radius: 12px;
-        }
+      /* Sign Up Form */
+      .signup-container {
+        max-width: 700px;
+        margin: 8rem auto;
+        padding: 2rem;
+        background-color: #eef2f6;
+        border-radius: 12px;
+      }
 
-        /* Success message specific styles */
-        .success-container {
-            text-align: center;
-        }
+      /* Success message specific styles */
+      .success-container {
+        text-align: center;
+      }
 
-        .success-container .signup-title {
-            font-size: 2rem;  /* Larger font for success title */
-            margin-bottom: 1rem;
-        }
+      .success-container .signup-title {
+        font-size: 2rem; /* Larger font for success title */
+        margin-bottom: 1rem;
+      }
 
-        .success-container p {
-            color: #172B4D;
-            line-height: 1.5;
-            margin: 0 auto;  /* Center the text block */
-            max-width: 80%;  /* Limit text width for readability */
-        }
+      .success-container p {
+        color: #172b4d;
+        line-height: 1.5;
+        margin: 0 auto; /* Center the text block */
+        max-width: 80%; /* Limit text width for readability */
+      }
 
-        /* Success message styles */
-        #successMessage {
-            text-align: center;
-            margin-top: 4rem;
-        }
+      /* Success message styles */
+      #successMessage {
+        text-align: center;
+        margin-top: 4rem;
+      }
 
-        .success-title {
-            font-size: 2rem;
-            color: #172B4D;
-            margin-bottom: 1rem;
-        }
+      .success-title {
+        font-size: 2rem;
+        color: #172b4d;
+        margin-bottom: 1rem;
+      }
 
-        .success-text {
-            color: #172B4D;
-            line-height: 1.5;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+      .success-text {
+        color: #172b4d;
+        line-height: 1.5;
+        max-width: 600px;
+        margin: 0 auto;
+      }
 
-        .signup-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-            color: #172B4D;
-        }
+      .signup-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        color: #172b4d;
+      }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #172B4D;
-        }
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #172b4d;
+      }
 
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
+      .form-group input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+      }
 
-        .signup-btn {
-            width: 100%;
-            padding: 0.8rem;
-            background-color: #4185F4;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
+      .signup-btn {
+        width: 100%;
+        padding: 0.8rem;
+        background-color: #4185f4;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        margin-bottom: 1rem;
+        font-weight: bold;
+      }
 
-        .login-link {
-            text-align: left;
-            color: #172B4D;
-        }
+      .login-link {
+        text-align: left;
+        color: #172b4d;
+      }
 
-        .login-link a {
-            color: #4185F4;
-            text-decoration: none;
-        }
+      .login-link a {
+        color: #4185f4;
+        text-decoration: none;
+      }
 
-        .login-link a {
-            color: #172B4D;
-            text-decoration: none;
-            cursor: pointer;
-        }
+      .login-link a {
+        color: #172b4d;
+        text-decoration: none;
+        cursor: pointer;
+      }
 
-        .login-link a:hover {
-            text-decoration: underline;
-        }
+      .login-link a:hover {
+        text-decoration: underline;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navbar">
-        <a href="index.html" class="logo">
-            <img src="./images/brello-logo.png" alt="Brello Logo">
-        </a>
-        <div class="nav-buttons">
-            <a href="login.html" class="button login-btn">Login</a>
-            <a href="signup.html" class="button start-btn">Start Now</a>
-        </div>
+      <a href="index.html" class="logo">
+        <img src="./images/brello-logo.png" alt="Brello Logo" />
+      </a>
+      <div class="nav-buttons">
+        <a href="login.html" class="button login-btn">Login</a>
+        <a href="signup.html" class="button start-btn">Start Now</a>
+      </div>
     </nav>
-    
+
     <!-- Success message (initially hidden) -->
-    <div id="successMessage" style="display: none;">
-        <h1 class="success-title">Successfully signed up!</h1>
-        <p class="success-text">Check your inbox for a confirmation email. If this email is not already in use you will have received a confirmation email.</p>
+    <div id="successMessage" style="display: none">
+      <h1 class="success-title">Successfully signed up!</h1>
+      <p class="success-text">
+        Check your inbox for a confirmation email. If this email is not already
+        in use you will have received a confirmation email.
+      </p>
     </div>
-    
+
     <!-- Signup form container -->
     <div class="signup-container">
-        <h2 class="signup-title">Sign Up</h2>
-        <form id="signupForm">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="signup-btn">Sign up</button>
-            <p class="login-link">Log in instead?</p>
-        </form>
+      <h2 class="signup-title">Sign Up</h2>
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit" class="signup-btn">Sign up</button>
+        <p class="login-link">Log in instead?</p>
+      </form>
     </div>
 
-    <script>
-        document.getElementById('signupForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('errorMessage');
-
-            try {
-                const response = await fetch('http://localhost:3000/api/signup', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email, password })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    // Hide the signup container completely
-                    document.querySelector('.signup-container').style.display = 'none';
-                    // Show success message
-                    document.getElementById('successMessage').style.display = 'block';
-                } else {
-                    errorMessage.textContent = data.message || 'Signup failed';
-                    errorMessage.style.display = 'block';
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                errorMessage.textContent = 'An error occurred during signup';
-                errorMessage.style.display = 'block';
-            }
-        });
-    </script>
-</body>
+    <script src="./scripts/signup.js"></script>
+  </body>
 </html>
